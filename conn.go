@@ -5,20 +5,12 @@ import (
 	"database/sql"
 )
 
-/*
-func NewConn() *DBConn {
-	conn := &DBConn{}
-}
-*/
 type DBConn struct {
 	driverName string
 	dsn        string
 	dbName     string
 
 	db *sql.DB
-}
-
-func (t *DBConn) Init() {
 }
 
 func (t *DBConn) Connect(_driverName, _dsn, _dbName string) (err error) {
