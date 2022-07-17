@@ -1,2 +1,2 @@
-#db
+# db
 golang db utility
