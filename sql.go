@@ -43,13 +43,13 @@ func SQL_insert_multi(_from string, _field ...map[string]interface{}) (sql strin
 			if len(fieldOne) != len(fieldNames) {
 				return "", nil, fmt.Errorf("field length is not same")
 			}
-			for _, s_field_name := range fieldNames {
-				i_value, is_exist := fieldOne[s_field_name]
-				if is_exist == false {
-					return "", nil, fmt.Errorf("field value is not exist | field name - %s", s_field_name)
+			for _, fieldName := range fieldNames {
+				v, isExist := fieldOne[fieldName]
+				if isExist == false {
+					return "", nil, fmt.Errorf("field value is not exist | field name - %s", fieldName)
 				}
 				val += fmt.Sprintf("?%s", DEF_delimiter)
-				value = append(value, i_value)
+				value = append(value, v)
 			}
 			val = val[0 : len(val)-len(DEF_delimiter)] // (value,) 안의 마지막 , 를 제거
 			val += fmt.Sprintf(")%s", DEF_delimiter)
@@ -152,7 +152,7 @@ func SQL_delete(_from string, _where string) (sql string) {
 	return sql
 }
 
-func SQL_insertOnDuplicateUpdate(_from string, _fields map[string]interface{}) (sql string, value []interface{}, err error) {
+func SQL_insert_OnDuplicateUpdate(_from string, _fields map[string]interface{}) (sql string, value []interface{}, err error) {
 	value = make([]interface{}, 0, 10)
 
 	var sqlFields, sqlValues, sqlSet string
