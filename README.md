@@ -1,1 +1,1 @@
-db 사용코드
+golang db utility
